@@ -29,10 +29,11 @@ public class N_linear implements PerfectHashing {
         if (hash[index] == null) {
             hash[index] = key;
         } else {
-            System.out.println(Level2Hash[index].size());
+            System.out.println("size at beginning = "+Level2Hash[index].size());
             int count = (int) Math.sqrt(Level2Hash[index].size());
             count++;
             count = count * count;
+            System.out.println("count= "+ count);
             matHashes[index] = new MatHash((int) (Math.log(count) / Math.log(2)));
             ArrayList<String> ReHach = new ArrayList<String>(count);
             for (int i = 0; i < count; i++) {
@@ -40,12 +41,16 @@ public class N_linear implements PerfectHashing {
             }
             for (int i = 0; i < Level2Hash[index].size(); i++) {//rehaching the past elements
                 String element = Level2Hash[index].get(i);
-                if(element != null)
-                    ReHach.add(matHashes[index].hash(element), element); // Add element at the specified index
+                if(element != null){
+                    ReHach.set(matHashes[index].hash(element), element); // Sets element at the specified index
+                    System.out.println("matHashes = "+matHashes[index].hash(element));
+                }
+
             }
             Level2Hash[index] = ReHach;
+//            System.arraycopy(ReHach, 0, Level2Hash[index], 0,Level2Hash.size);
             int index2 = matHashes[index].hash(key); // get key of the inserted element
-            Level2Hash[index].add(index2, key); // Add element at the specified index
+            Level2Hash[index].set(index2, key); // Sets element at the specified index
             System.out.println("size" + Level2Hash[index].size());
 
         }
@@ -71,7 +76,7 @@ public class N_linear implements PerfectHashing {
         }
     }
     public static void main(String[] args) {
-        N_linear test = new N_linear(20);
+        N_linear test = new N_linear(8);
         test.insert("nancy");
         test.insert("sara");
         test.insert("saafasdfra");
