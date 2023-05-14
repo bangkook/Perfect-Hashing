@@ -22,8 +22,8 @@ public class N_linear implements PerfectHashing {
     @Override
     public boolean insert(String key) {
         int index = matHash.hash(key); // get key of the inserted element
-        System.out.println("index" + index);
         if(search(key)){//TODO
+            System.out.println("cant be inserted");
             return false;
         }
         if (hash[index] == null) {
@@ -45,10 +45,8 @@ public class N_linear implements PerfectHashing {
                     ReHach.set(matHashes[index].hash(element), element); // Sets element at the specified index
                     System.out.println("matHashes = "+matHashes[index].hash(element));
                 }
-
             }
             Level2Hash[index] = ReHach;
-//            System.arraycopy(ReHach, 0, Level2Hash[index], 0,Level2Hash.size);
             int index2 = matHashes[index].hash(key); // get key of the inserted element
             Level2Hash[index].set(index2, key); // Sets element at the specified index
             System.out.println("size" + Level2Hash[index].size());
@@ -64,6 +62,11 @@ public class N_linear implements PerfectHashing {
 
     @Override
     public boolean search(String key) {
+        int index = matHash.hash(key);
+        if(hash[index] != null && (key.equals(hash[index]) || (matHashes[index] != null && (Level2Hash[index].get(matHashes[index].hash(key))).equals(key)))){
+            System.out.println("1");
+            return true;
+        }
         return false;
     }
     private void printHash(){
@@ -76,15 +79,14 @@ public class N_linear implements PerfectHashing {
         }
     }
     public static void main(String[] args) {
-        N_linear test = new N_linear(8);
+        N_linear test = new N_linear(6);
         test.insert("nancy");
         test.insert("sara");
-        test.insert("saafasdfra");
-        test.insert("ssdfsdara");
-        test.insert("safdsfra");
-        test.insert("saefwqera");
-        test.insert("sfdsara");
-        test.insert("sardfsdfdsfsdfa");
+        test.insert("saraaaa");
+        test.insert("saraaaaaaaaa");
+        test.insert("saraaaaaaaaaaaa");
+        System.out.println(test.search("saro"));
+        test.insert("saraaaaaaaaaaaa");
 
 
         test.printHash();
