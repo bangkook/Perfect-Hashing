@@ -23,7 +23,7 @@ public class N_linear implements PerfectHashing {
     public boolean insert(String key) {
         int index = matHash.hash(key); // get key of the inserted element
         System.out.println("index" + index);
-        if(search(key)){//TODO 
+        if(search(key)){//TODO
             return false;
         }
         if (hash[index] == null) {
@@ -33,15 +33,19 @@ public class N_linear implements PerfectHashing {
             int count = (int) Math.sqrt(Level2Hash[index].size());
             count++;
             count = count * count;
-            Level2Hash[index].ensureCapacity(count);
             matHashes[index] = new MatHash((int) (Math.log(count) / Math.log(2)));
-            int index2 = matHashes[index].hash(key); // get key of the inserted element
+            ArrayList<String> ReHach = new ArrayList<String>(count);
             for (int i = 0; i < count; i++) {
-                if(i == index2)
-                Level2Hash[index].add(index2, key); // Add element at the specified index
-                else
-                    Level2Hash[index].add(i,  null); // Add element at the specified index
+                ReHach.add(i, null);
             }
+            for (int i = 0; i < Level2Hash[index].size(); i++) {//rehaching the past elements
+                String element = Level2Hash[index].get(i);
+                if(element != null)
+                ReHach.add(matHashes[index].hash(element), element); // Add element at the specified index
+            }
+            Level2Hash[index] = ReHach;
+            int index2 = matHashes[index].hash(key); // get key of the inserted element
+            Level2Hash[index].add(index2, key); // Add element at the specified index
             System.out.println("size" + Level2Hash[index].size());
 
         }
