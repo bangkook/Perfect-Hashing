@@ -100,7 +100,12 @@ public class N_Square implements PerfectHashing{
 
     @Override
     public boolean search(String key) {
-        return false;
+        int index = matHash.hash(key);
+        if(hash[index] == null|| ! hash[index].equals(key)){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     public static void main(String[] args) {
@@ -115,5 +120,7 @@ public class N_Square implements PerfectHashing{
         System.out.println(res3);
         System.out.println(res4);
         n2.printHashog();
+        System.out.println(n2.search("Ema"));
+
     }
 }
