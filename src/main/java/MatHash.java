@@ -18,9 +18,9 @@ public class MatHash {
         for(int i = 0; i < size; i++) {
             hx <<= 1;
             int x =  getParity(key & hashMatrix[i]);
-            System.out.println("x= "+x);
+//            System.out.println("x= "+x);
             hx |= x;
-            System.out.println("hx= "+hx);
+//            System.out.println("hx= "+hx);
         }
         return hx;
     }
