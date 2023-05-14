@@ -44,8 +44,9 @@ public class N_Square implements PerfectHashing{
             System.out.println("after rehash");
             System.out.println("h after rehash= ");
             printHash(h);
-            hash2 = h;
+//            hash2 = h;
 //            hash=h;
+            System.arraycopy(h, 0, hash2, 0,M);
             System.out.println("hash2 after rehash = ");
             printHash(hash2);
             System.out.println("hash og = ");
