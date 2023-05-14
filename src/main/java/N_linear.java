@@ -41,7 +41,7 @@ public class N_linear implements PerfectHashing {
             for (int i = 0; i < Level2Hash[index].size(); i++) {//rehaching the past elements
                 String element = Level2Hash[index].get(i);
                 if(element != null)
-                ReHach.add(matHashes[index].hash(element), element); // Add element at the specified index
+                    ReHach.add(matHashes[index].hash(element), element); // Add element at the specified index
             }
             Level2Hash[index] = ReHach;
             int index2 = matHashes[index].hash(key); // get key of the inserted element
