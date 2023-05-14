@@ -4,6 +4,8 @@ public class N_Square implements PerfectHashing{
     private MatHash matHash;
     private int M; // M = N^2
 
+    int reh=0;
+
     public N_Square(int n) {
         this.N = n;
         this.M = N*N;
@@ -13,46 +15,67 @@ public class N_Square implements PerfectHashing{
 
     @Override
     public boolean insert(String key) {
+        System.out.println("hash in main insert before= ");
+        printHash(hash);
         return insert(key,hash);
+
     }
 
     boolean insert(String key, String[] hash2){
         int index = matHash.hash(key);
         if(hash2[index] == null){ //empty, we can insert
-            System.out.println("inserted");
+            System.out.println("inserted = "+key);
             hash2[index] = key;
+            System.out.println("hash2 inserted= ");
+            printHash(hash2);
+            System.out.println("hash og = ");
+            printHash(hash);
         }else if(hash2[index].equals(key)){
 
             // found same key
+            System.out.println("found same key");
             printHash(hash2);
             return false; // already inserted
         }else{
-            System.out.println("Collide");
+            System.out.println("Collide = "+key);
             // collide
+            System.out.println("going in rehash");
             String[] h = rehash(key, hash2);
-            System.out.println("h = ");
+            System.out.println("after rehash");
+            System.out.println("h after rehash= ");
             printHash(h);
             hash2 = h;
+//            hash=h;
+            System.out.println("hash2 after rehash = ");
+            printHash(hash2);
+            System.out.println("hash og = ");
+            printHash(hash);
 //            String[] rehashed = rehash(key);
 //            // recursively call insert with the rehashed array
 //            return insert(key, rehashed);
         }
-        System.out.println("hash2 = ");
-        printHash(hash2);
+
         return true;
     }
 
     private String[] rehash(String key, String[] oldhash) {
-        System.out.println("in rehash");
+        reh++;
+        System.out.println("in rehash ="+reh);
+        System.out.println("oldHash in begin of rehash= ");
+        printHash(oldhash);
         String []newHash = new String[M];
         matHash = new MatHash((int)(Math.log(M)/Math.log(2)));
         for(String str : oldhash){
             if(str != null){
+                System.out.println(" str ="+str);
                 insert(str,newHash);
             }
         }
         System.out.println("Inserting key in rehash");
         insert(key,newHash);
+        System.out.println("newHash in end of rehash= ");
+        printHash(newHash);
+        reh--;
         return newHash;
     }
 
@@ -60,7 +83,13 @@ public class N_Square implements PerfectHashing{
         for(String s : h){
             System.out.print(s +" , ");
         }
-        System.out.println("");
+        System.out.println("\n------------------");
+    }
+    public void printHashog(){
+        for(String s : hash){
+            System.out.print(s +" , ");
+        }
+        System.out.println("\n------------------");
     }
 
     @Override
@@ -84,5 +113,6 @@ public class N_Square implements PerfectHashing{
         System.out.println(res2);
         System.out.println(res3);
         System.out.println(res4);
+        n2.printHashog();
     }
 }
