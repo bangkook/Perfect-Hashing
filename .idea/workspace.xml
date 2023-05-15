@@ -99,6 +99,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.MatHash" />
+      <item itemvalue="Application.N_linear" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.N_linear" />
