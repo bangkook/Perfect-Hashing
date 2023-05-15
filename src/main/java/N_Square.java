@@ -132,7 +132,15 @@ public class N_Square implements PerfectHashing{
         n2.printHashog();
         System.out.println(n2.delete("Maria"));
         n2.printHashog();
-        System.out.println("iiii");
+        System.out.println(n2.delete("Mari"));
+        n2.printHashog();
+        System.out.println(n2.delete("Eman"));
+        n2.printHashog();
+        System.out.println(n2.delete("Mariam"));
+        n2.printHashog();
+        System.out.println(n2.delete("Maria"));
+        n2.printHashog();
+        System.out.println("yyyyy");
 
     }
 }
