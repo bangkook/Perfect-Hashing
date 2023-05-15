@@ -63,7 +63,7 @@ public class N_linear implements PerfectHashing {
     @Override
     public boolean search(String key) {
         int index = matHash.hash(key);
-        if(hash[index] != null && (key.equals(hash[index]) || (matHashes[index] != null && (Level2Hash[index].get(matHashes[index].hash(key))).equals(key)))){
+        if(hash[index] != null && (key.equals(hash[index]) || (matHashes[index] != null && Level2Hash[index].get(matHashes[index].hash(key)) != null &&(Level2Hash[index].get(matHashes[index].hash(key))).equals(key)))){
             System.out.println("1");
             return true;
         }
