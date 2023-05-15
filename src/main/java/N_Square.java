@@ -95,6 +95,11 @@ public class N_Square implements PerfectHashing{
 
     @Override
     public boolean delete(String key) {
+        if(search(key)){
+            int index = matHash.hash(key);
+            hash[index]=null;
+            return true;
+        }
         return false;
     }
 
@@ -121,6 +126,13 @@ public class N_Square implements PerfectHashing{
         System.out.println(res4);
         n2.printHashog();
         System.out.println(n2.search("Ema"));
+        System.out.println(n2.delete("Ema"));
+        n2.printHashog();
+        System.out.println(n2.delete("Maria"));
+        n2.printHashog();
+        System.out.println(n2.delete("Maria"));
+        n2.printHashog();
+        System.out.println("iiii");
 
     }
 }
