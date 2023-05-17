@@ -9,5 +9,8 @@
         <module name="Perfect-Hashing" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Perfect-Hashing" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
