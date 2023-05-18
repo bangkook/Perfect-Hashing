@@ -1,15 +1,17 @@
 import java.util.ArrayList;
 
 public class N_linear implements PerfectHashing {
-    int N;
-    String[] hash;
-    ArrayList<String>[] Level2Hash;
-    MatHash matHash;
-    MatHash[] matHashes;
+    private int N;
+    private int M;
+    private int collisions = 0;
+    private String[] hash;
+    private ArrayList<String>[] Level2Hash;
+    private MatHash matHash;
+    private MatHash[] matHashes;
 
     public N_linear(int n) {
         this.N = n;
-        int M = N; // M = N
+        this.M = N; // M = N
         matHash = new MatHash((int) (Math.log(M) / Math.log(2))); // hash level 1 function
         hash = new String[N];
         Level2Hash = new ArrayList[N];
@@ -23,17 +25,18 @@ public class N_linear implements PerfectHashing {
     public boolean insert(String key) {
         int index = matHash.hash(key); // get key of the inserted element
         if(search(key)){//TODO
-            System.out.println("cant be inserted");
+            //System.out.println("cant be inserted");
             return false;
         }
         if (hash[index] == null) {
             hash[index] = key;
         } else {
-            System.out.println("size at beginning = "+Level2Hash[index].size());
+            collisions++;
+           // System.out.println("size at beginning = "+Level2Hash[index].size());
             int count = ((int) Math.sqrt(Level2Hash[index].size()))==0 ?1:(int) Math.sqrt(Level2Hash[index].size());
             count++;
             count = count * count;
-            System.out.println("count= "+ count);
+           // System.out.println("count= "+ count);
             matHashes[index] = new MatHash((int) (Math.log(count) / Math.log(2)));
             ArrayList<String> ReHach = new ArrayList<String>(count);
             for (int i = 0; i < count; i++) {
@@ -43,15 +46,15 @@ public class N_linear implements PerfectHashing {
                 String element = Level2Hash[index].get(i);
                 if(element != null){
                     ReHach.set(matHashes[index].hash(element), element); // Sets element at the specified index
-                    System.out.println("matHashes = "+matHashes[index].hash(element));
+                   // System.out.println("matHashes = "+matHashes[index].hash(element));
 
                 }
             }
             Level2Hash[index] = ReHach;
             int index2 = matHashes[index].hash(key); // get key of the inserted element
             Level2Hash[index].set(index2, key); // Sets element at the specified index
-            System.out.println("size" + Level2Hash[index].size());
-            System.out.println("matHashes index2 = "+index2);
+          //  System.out.println("size" + Level2Hash[index].size());
+            //System.out.println("matHashes index2 = "+index2);
 
         }
         return true;
@@ -75,11 +78,11 @@ public class N_linear implements PerfectHashing {
     @Override
     public boolean delete(String key) {
         if(!search(key)){//TODO
-            System.out.println("cant be deleted");
+            //System.out.println("cant be deleted");
             return false;
         }else {
             int index = matHash.hash(key);
-            if (hash[index] == key) {
+            if (hash[index].equals(key)) {
                 if (Level2Hash[index].size() == 0) {
                     hash[index] = null;
                 } else {
@@ -93,12 +96,12 @@ public class N_linear implements PerfectHashing {
                     }
                     hash[index] = element;
                     int size = (int) (Math.sqrt(Level2Hash[index].size()) - 1);
-                    System.out.println("size1: "+ size);
+                    //System.out.println("size1: "+ size);
                     if(size >1) {
                         ArrayList<String> ReHach = rehashing(size * size, index);
                         Level2Hash[index]=ReHach;
                     } else{
-                        System.out.println("size ="+size);
+                      //  System.out.println("size ="+size);
                         Level2Hash[index].clear();
                     }
                 }
@@ -107,12 +110,12 @@ public class N_linear implements PerfectHashing {
                 if (Level2Hash[index].get(index2) == key) {
                     Level2Hash[index].set(index2, null);
                     int size = (int) (Math.sqrt(Level2Hash[index].size()) - 1);
-                    System.out.println("size2: "+ size);
+                    //System.out.println("size2: "+ size);
                     if(size >1) {
                         ArrayList<String> ReHach = rehashing(size * size, index);
                         Level2Hash[index]=ReHach;
                     } else{
-                        System.out.println("size ="+size);
+                    //    System.out.println("size ="+size);
                         Level2Hash[index].clear();
                     }
                 }
@@ -124,12 +127,22 @@ public class N_linear implements PerfectHashing {
     @Override
     public boolean search(String key) {
         int index = matHash.hash(key);
-        if(hash[index] != null && (key.equals(hash[index]) || (matHashes[index] != null && Level2Hash[index].get(matHashes[index].hash(key)) != null &&(Level2Hash[index].get(matHashes[index].hash(key))).equals(key)))){
-            System.out.println("1");
-            return true;
-        }
-        return false;
+        // System.out.println("1");
+        return hash[index] != null && (key.equals(hash[index]) || (matHashes[index] != null && Level2Hash[index].get(matHashes[index].hash(key)) != null && (Level2Hash[index].get(matHashes[index].hash(key))).equals(key)));
     }
+
+    public int getCollisions() {
+        return collisions;
+    }
+
+    public int getSize() {
+        int size = 0;
+        for (int i = 0; i < N; i++) {
+            size += Math.max(1, Level2Hash[i].size());
+        }
+        return size;
+    }
+
     private void printHash(){
         for (int i = 0; i < N; i++) {
             System.out.print(hash[i] +">>");

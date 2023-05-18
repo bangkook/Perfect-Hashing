@@ -1,6 +1,7 @@
 public class N_Square implements PerfectHashing{
     private int N;
-    private String []hash;
+    private int collisions = 0;
+    private String[] hash;
     private MatHash matHash;
     private int M; // M = N^2
 
@@ -15,8 +16,8 @@ public class N_Square implements PerfectHashing{
 
     @Override
     public boolean insert(String key) {
-        System.out.println("hash in main insert before= ");
-        printHash(hash);
+       // System.out.println("hash in main insert before= ");
+     //   printHash(hash);
         return insert(key,hash);
 
     }
@@ -24,33 +25,34 @@ public class N_Square implements PerfectHashing{
     boolean insert(String key, String[] hash2){
         int index = matHash.hash(key);
         if(hash2[index] == null){ //empty, we can insert
-            System.out.println("inserted = "+key);
+            //System.out.println("inserted = "+key);
             hash2[index] = key;
-            System.out.println("hash2 inserted= ");
-            printHash(hash2);
-            System.out.println("hash og = ");
-            printHash(hash);
+            //System.out.println("hash2 inserted= ");
+            //printHash(hash2);
+            //System.out.println("hash og = ");
+           // printHash(hash);
         }else if(hash2[index].equals(key)){
 
             // found same key
-            System.out.println("found same key");
-            printHash(hash2);
+            //System.out.println("found same key");
+           // printHash(hash2);
             return false; // already inserted
         }else{
-            System.out.println("Collide = "+key);
+            collisions++;
+          //  System.out.println("Collide = "+key);
             // collide
-            System.out.println("going in rehash");
+            //System.out.println("going in rehash");
             String[] h = rehash(key, hash2);
-            System.out.println("after rehash");
-            System.out.println("h after rehash= ");
-            printHash(h);
+           // System.out.println("after rehash");
+           // System.out.println("h after rehash= ");
+           // printHash(h);
 //            hash2 = h;
 //            hash=h;
             System.arraycopy(h, 0, hash2, 0,M);
-            System.out.println("hash2 after rehash = ");
-            printHash(hash2);
-            System.out.println("hash og = ");
-            printHash(hash);
+            //System.out.println("hash2 after rehash = ");
+            //printHash(hash2);
+            //System.out.println("hash og = ");
+            //printHash(hash);
 //            String[] rehashed = rehash(key);
 //            // recursively call insert with the rehashed array
 //            return insert(key, rehashed);
@@ -61,21 +63,21 @@ public class N_Square implements PerfectHashing{
 
     private String[] rehash(String key, String[] oldhash) {
         reh++;
-        System.out.println("in rehash ="+reh);
-        System.out.println("oldHash in begin of rehash= ");
-        printHash(oldhash);
+        //System.out.println("in rehash ="+reh);
+        //System.out.println("oldHash in begin of rehash= ");
+       // printHash(oldhash);
         String []newHash = new String[M];
         matHash = new MatHash((int)(Math.log(M)/Math.log(2)));
         for(String str : oldhash){
             if(str != null){
-                System.out.println(" str ="+str);
+                //System.out.println(" str ="+str);
                 insert(str,newHash);
             }
         }
-        System.out.println("Inserting key in rehash");
+       // System.out.println("Inserting key in rehash");
         insert(key,newHash);
-        System.out.println("newHash in end of rehash= ");
-        printHash(newHash);
+        //System.out.println("newHash in end of rehash= ");
+       // printHash(newHash);
         reh--;
         return newHash;
     }
@@ -106,11 +108,15 @@ public class N_Square implements PerfectHashing{
     @Override
     public boolean search(String key) {
         int index = matHash.hash(key);
-        if(hash[index] == null|| ! hash[index].equals(key)){
-            return false;
-        }else{
-            return true;
-        }
+        return hash[index] != null && hash[index].equals(key);
+    }
+
+    public int getCollisions() {
+        return collisions;
+    }
+
+    public int getSize() {
+        return M;
     }
 
     public static void main(String[] args) {
