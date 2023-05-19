@@ -4,21 +4,22 @@ public class N_Square implements PerfectHashing{
     private String[] hash;
     private MatHash matHash;
     private int M; // M = N^2
-//    private int noOfInserted = 0;
+    private int noOfInserted = 0;
     int reh = 0;
 
     public N_Square(int n) {
         this.N = n;
         this.M = N*N;
-        this.matHash = new MatHash((int)(Math.ceil(Math.log(M)/Math.log(2))));
+        this.matHash = new MatHash((int)(Math.log(M)/Math.log(2)));
         this.hash = new String[M];
     }
 
     @Override
     public boolean insert(String key) {
+        System.out.println("In insert of N_Square: N  = "+ N);
        // System.out.println("hash in main insert before= ");
      //   printHash(hash);
-//        noOfInserted++;
+        noOfInserted++;
 //        if(noOfInserted > N){
 //            return false;
 //        }
@@ -69,7 +70,7 @@ public class N_Square implements PerfectHashing{
         //System.out.println("oldHash in begin of rehash= ");
        // printHash(oldhash);
         String []newHash = new String[M];
-        matHash = new MatHash((int)(Math.ceil(Math.log(M)/Math.log(2))));
+        matHash = new MatHash((int)(Math.log(M)/Math.log(2)));
         for(String str : oldhash){
             if(str != null){
                 //System.out.println(" str ="+str);
@@ -111,6 +112,11 @@ public class N_Square implements PerfectHashing{
     public boolean search(String key) {
         int index = matHash.hash(key);
         return hash[index] != null && hash[index].equals(key);
+    }
+
+    @Override
+    public int getInserted() {
+        return noOfInserted;
     }
 
     public int getCollisions() {

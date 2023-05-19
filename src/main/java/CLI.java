@@ -3,6 +3,13 @@ import java.io.File;
 import java.util.Scanner;
 
 public class CLI {
+    public static int nearestGreaterPowerOfTwo(int num) {
+        int power = 1;
+        while (power <= num) {
+            power *= 2;
+        }
+        return power;
+    }
 
     public static void main(String[] args) {
         String redColor = "\u001B[31m";
@@ -26,6 +33,8 @@ public class CLI {
             Scanner sc = new Scanner(System.in);
             System.out.println("Enter the Size of the HashTable:");
             int size = sc.nextInt();
+            size = nearestGreaterPowerOfTwo(size);
+            System.out.println("Size = "+ size);
             System.out.println("------------------------------------------------------------------------------------------------");
             System.out.println("Choose tree type\n" + "1) O(N)-Space Solution\n" + "2) O(N^2)-Space Solution\n" + "3) Exit");
             System.out.print(whiteColor + "Select the tree or exit: " + resetColor);
@@ -35,14 +44,16 @@ public class CLI {
             String operations = "";
             switch (input) {
                 case "1":
-                    dic = new Dictionary(new N_linear(size));
+                    dic = new Dictionary(new N_linear(size),size);
+//                    dic.setType(1);
                     System.out.println("------------------------------------------------------------------------------------------------");
                     System.out.println("Choose operation \n" + "1) Insert\n" + "2) Delete\n" + "3) Search\n" + "4) Batch insert\n" + "5) Batch delete\n" + "6) Return to Main menu");
                     System.out.print(whiteColor + "Select your operation: " + resetColor);
                     operations = sc.nextLine();
                     break;
                 case "2":
-                    dic = new Dictionary(new N_Square(size));
+                    dic = new Dictionary(new N_Square(size),size);
+//                    dic.setType(2);
                     System.out.println("------------------------------------------------------------------------------------------------");
                     System.out.println("Choose operation \n" + "1) Insert\n" + "2) Delete\n" + "3) Search\n" + "4) Batch insert\n" + "5) Batch delete\n" + "6) Return to Main menu");
                     System.out.print(whiteColor + "Select your operation: " + resetColor);
@@ -55,7 +66,7 @@ public class CLI {
                     System.out.println(redColor + "Invalid input" + resetColor);
                     break;
             }
-
+            sc.nextLine();
             if (input.equals("3")) {
                 break;
             }
@@ -68,7 +79,7 @@ public class CLI {
                         if (dic.insert(str)) {
                             System.out.println(greenColor + "Added successfully" + resetColor);
                         } else {
-                            System.out.println(yellowColor + "Already exists" + resetColor);
+                            System.out.println(redColor + "Invalid" + resetColor);
                         }
                         break;
                     }

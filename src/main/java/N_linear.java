@@ -57,6 +57,7 @@ public class N_linear implements PerfectHashing {
                 }
             }
         }
+        printHash();
         return true;
     }
 
@@ -121,6 +122,7 @@ public class N_linear implements PerfectHashing {
                 }
             }
         }
+        printHash();
         return true;
     }
 
@@ -130,6 +132,8 @@ public class N_linear implements PerfectHashing {
         // System.out.println("1");
         return hash[index] != null && (key.equals(hash[index]) || (matHashes[index] != null && Level2Hash[index].get(matHashes[index].hash(key)) != null && (Level2Hash[index].get(matHashes[index].hash(key))).equals(key)));
     }
+
+
 
     public int getCollisions() {
         return collisions;
@@ -152,8 +156,8 @@ public class N_linear implements PerfectHashing {
             System.out.println("");
         }
     }
-
-    public int FirstLevelCount(){return FirstLevelCount;}
+    @Override
+    public int getInserted(){return FirstLevelCount;}
 
     public static void main(String[] args) {
         N_linear test = new N_linear(6);
