@@ -71,7 +71,15 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RunManager" selected="Application.Dictionary">
+  <component name="RunManager" selected="Application.CLI">
+    <configuration name="CLI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="CLI" />
+      <module name="Perfect-Hashing" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Dictionary" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Dictionary" />
       <module name="Perfect-Hashing" />
@@ -135,9 +143,11 @@
       <item itemvalue="Application.N_linear" />
       <item itemvalue="JUnit.UniversalHashTest.testKeysInRange" />
       <item itemvalue="Application.Dictionary" />
+      <item itemvalue="Application.CLI" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.CLI" />
         <item itemvalue="Application.Dictionary" />
         <item itemvalue="Application.N_linear" />
         <item itemvalue="JUnit.UniversalHashTest.testKeysInRange" />

@@ -56,9 +56,8 @@ public class N_linear implements PerfectHashing {
                     flag = false;
                 }
             }
-            return true;
         }
-        return false;
+        return true;
     }
 
     public ArrayList<String> rehashing(int size, int index){
