@@ -7,9 +7,18 @@ public class N_Square implements PerfectHashing{
     private int noOfInserted = 0;
     int reh = 0;
 
+    private static int nearestGreaterPowerOfTwo(int num) {
+        int power = 1;
+        while (power <= num) {
+            power *= 2;
+        }
+        return power;
+    }
     public N_Square(int n) {
         this.N = n;
-        this.M = N*N;
+         int N_sqBefore= N*N;
+         this.M = nearestGreaterPowerOfTwo(N_sqBefore);
+        System.out.println("Size of N^2 table = "+ M);
         this.matHash = new MatHash((int)(Math.log(M)/Math.log(2)));
         this.hash = new String[M];
     }

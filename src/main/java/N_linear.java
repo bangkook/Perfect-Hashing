@@ -10,10 +10,18 @@ public class N_linear implements PerfectHashing {
     private MatHash[] matHashes;
     private int FirstLevelCount = 0;
 
+    private static int nearestGreaterPowerOfTwo(int num) {
+        int power = 1;
+        while (power <= num) {
+            power *= 2;
+        }
+        return power;
+    }
 
     public N_linear(int n) {
         this.N = n;
-        this.M = N; // M = N
+        this.M = nearestGreaterPowerOfTwo(N); // M = N
+        System.out.println("Size of N table = "+ M);
         matHash = new MatHash((int) (Math.log(M) / Math.log(2))); // hash level 1 function
         hash = new String[N];
         Level2Hash = new ArrayList[N];

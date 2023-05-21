@@ -3,13 +3,7 @@ import java.io.File;
 import java.util.Scanner;
 
 public class CLI {
-    public static int nearestGreaterPowerOfTwo(int num) {
-        int power = 1;
-        while (power <= num) {
-            power *= 2;
-        }
-        return power;
-    }
+
 
     public static void main(String[] args) {
         String redColor = "\u001B[31m";
@@ -33,7 +27,6 @@ public class CLI {
             Scanner sc = new Scanner(System.in);
             System.out.println("Enter the Size of the HashTable:");
             int size = sc.nextInt();
-            size = nearestGreaterPowerOfTwo(size);
             System.out.println("Size = "+ size);
             System.out.println("------------------------------------------------------------------------------------------------");
             System.out.println("Choose tree type\n" + "1) O(N)-Space Solution\n" + "2) O(N^2)-Space Solution\n" + "3) Exit");
