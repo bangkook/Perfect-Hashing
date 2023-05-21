@@ -24,25 +24,23 @@ public class Comparison {
     }
 
     public void compare() {
-        int N = 8;
-        int cnt = 15;
         int avg = 5;
         long start, end;
-        for(int i = 0; i < cnt; i++) {
+        for(int i = 8; i <= 8192; i *= 2) {
             // [space, time, collision]
             long[] totL = {0, 0, 0}, totQ = {0, 0, 0};
             for(int j = 0; j < avg; j++) {
-                N_linear linear = new N_linear(N);
-                N_Square quad = new N_Square(N);
+                N_linear linear = new N_linear(i);
+                N_Square quad = new N_Square(i);
 
-                ArrayList<String> words = generateRandomWords(N);
+                ArrayList<String> words = generateRandomWords(i);
                 start = System.nanoTime();
                 for(String word : words) {
                     linear.insert(word);
                 }
                 end = System.nanoTime();
                 totL[0] += linear.getSize();
-                totL[1] += end - start;
+                totL[1] += (end - start) / avg;
                 totL[2] += linear.getCollisions();
 
                 start = System.nanoTime();
@@ -51,14 +49,13 @@ public class Comparison {
                 }
                 end = System.nanoTime();
                 totQ[0] += quad.getSize();
-                totQ[1] += end - start;
+                totQ[1] += (end - start) / avg;
                 totQ[2] += quad.getCollisions();
             }
-            System.out.println("At Size = " + N);
+            System.out.println("At Size = " + i);
             System.out.println("Space: Linear = " + totL[0] / avg + ", Quad = " + totQ[0] / avg);
-            System.out.println("Time: Linear = " + totL[1] / avg + ", Quad = " + totQ[1] / avg);
-            System.out.println("Collisions: Linear = " + totL[2] / avg + ", Quad = " + totQ[2] / avg);
-            N *= 2;
+            System.out.println("Time: Linear = " + totL[1] + ", Quad = " + totQ[1]);
+            System.out.println("Collisions: Linear = " + totL[2] / avg + ", Quad = " + Math.ceil(1.0 * totQ[2] / avg));
         }
     }
     public static void main(String[] args) {

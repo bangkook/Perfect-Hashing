@@ -16,7 +16,7 @@ public class N_Square implements PerfectHashing{
 
     @Override
     public boolean insert(String key) {
-        System.out.println("In insert of N_Square: N  = "+ N);
+      //  System.out.println("In insert of N_Square: N  = "+ N);
        // System.out.println("hash in main insert before= ");
      //   printHash(hash);
         noOfInserted++;
@@ -40,8 +40,8 @@ public class N_Square implements PerfectHashing{
         }else if(hash2[index].equals(key)){
 
             // found same key
-            System.out.println("found same key");
-            printHash(hash2);
+           // System.out.println("found same key");
+            //printHash(hash2);
             return false; // already inserted
         }else{
             collisions++;
@@ -51,7 +51,7 @@ public class N_Square implements PerfectHashing{
             String[] h = rehash(key, hash2);
 //            System.out.println("after rehash");
 //            System.out.println("h after rehash= ");
-            printHash(h);
+            //printHash(h);
 //            hash2 = h;
 //            hash=h;
             System.arraycopy(h, 0, hash2, 0,M);

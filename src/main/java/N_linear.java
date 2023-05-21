@@ -32,7 +32,6 @@ public class N_linear implements PerfectHashing {
             hash[index] = key;
             FirstLevelCount += 1 ;
         } else {
-            collisions++;
             int count = ((int) Math.sqrt(Level2Hash[index].size())) == 0 ? 1 : (int) Math.sqrt(Level2Hash[index].size());
             count++;
             count = count * count;
@@ -50,6 +49,7 @@ public class N_linear implements PerfectHashing {
                         int temp=matHashes[index].hash(element);
                         if(ReHach.get(temp)==null) ReHach.set(temp, element);
                         else{
+                            collisions++; // Collision happens
                             flag=true;
                             break;
                         }
@@ -68,7 +68,7 @@ public class N_linear implements PerfectHashing {
                 }
             }
         }
-        printHash();
+       // printHash();
         return true;
     }
 
