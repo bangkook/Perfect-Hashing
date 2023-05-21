@@ -52,10 +52,10 @@ public class Dictionary implements IDictionary{
     @Override
     public Point batchInsert(String fileName) {
         List<String> words = readFile(fileName);
-        if(perfectHash.getInserted() + words.size() > N){
+//        if(perfectHash.getInserted() + words.size() > N){
             // can't insert because the size of file + the items already inserted is greater than N
-            return new Point(0, words.size());
-        }
+//            return new Point(0, words.size());
+//        }
 
         int inserted = 0;
         start = System.nanoTime();

@@ -59,7 +59,7 @@ public class CLI {
                     System.out.println(redColor + "Invalid input" + resetColor);
                     break;
             }
-            sc.nextLine();
+//            sc.nextLine();
             if (input.equals("3")) {
                 break;
             }
@@ -122,6 +122,7 @@ public class CLI {
                     }
                     case "6":
                         flag = false;
+//                        sc.nextLine();
                     break;
                     default:
                         System.out.println(redColor + "Invalid input" + resetColor);

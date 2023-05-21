@@ -19,8 +19,8 @@ public class N_linear implements PerfectHashing {
     }
 
     public N_linear(int n) {
-        this.N = n;
-        this.M = nearestGreaterPowerOfTwo(N); // M = N
+        this.N = nearestGreaterPowerOfTwo(n);
+        this.M = N; // M = N
         System.out.println("Size of N table = "+ M);
         matHash = new MatHash((int) (Math.log(M) / Math.log(2))); // hash level 1 function
         hash = new String[N];
@@ -79,6 +79,7 @@ public class N_linear implements PerfectHashing {
             }
 
         }
+        printHash();
         return true;
     }
 
@@ -204,6 +205,7 @@ public class N_linear implements PerfectHashing {
             }
             System.out.println("");
         }
+        System.out.println("----------------------------------------------------------");
     }
     @Override
     public int getInserted(){return FirstLevelCount;}
