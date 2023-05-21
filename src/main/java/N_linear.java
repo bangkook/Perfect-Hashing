@@ -84,18 +84,6 @@ public class N_linear implements PerfectHashing {
     }
 
     public ArrayList<String> rehashing(int count, int index){
-//        matHashes[index] = new MatHash((int) (Math.log(size) / Math.log(2)));
-//        ArrayList<String> ReHach = new ArrayList<String>(size);
-//        for (int i = 0; i < size; i++) {
-//            ReHach.add(i, null);
-//        }
-//        for (int i = 0; i < Level2Hash[index].size(); i++) {//rehaching the past elements
-//            String element = Level2Hash[index].get(i);
-//            if(element != null){
-//                ReHach.set(matHashes[index].hash(element), element); // Sets element at the specified index
-//                //System.out.println("matHashes = "+matHashes[index].hash(element));
-//            }
-//        }
         ArrayList<String> ReHach=new ArrayList<String>(count);
         boolean flag = true;
         while (flag) {
@@ -130,40 +118,22 @@ public class N_linear implements PerfectHashing {
             return false;
         }else {
             int index = matHash.hash(key);
-            if (hash[index].equals(key)) {
-                if (Level2Hash[index].size() == 0) {
-                    hash[index] = null;
-                } else {
-                    String element = null;
-                    for (int i = 0; i < Level2Hash[index].size(); i++) { //searching for the first element in small hash table
-                        if (Level2Hash[index].get(i) != null) {
-                            element = Level2Hash[index].get(i);
-                            Level2Hash[index].set(i, null);
-                            break;
-                        }
-                    }
-                    hash[index] = element;
-                    int size = (int) (Math.sqrt(Level2Hash[index].size()) - 1);
-                    //System.out.println("size1: "+ size);
-                    if(size >1) {
-                        ArrayList<String> ReHach = rehashing(size * size, index);
-                        Level2Hash[index]=ReHach;
-                    } else{
-                      //  System.out.println("size ="+size);
-                        Level2Hash[index].clear();
-                        matHashes[index]=null;
-                    }
-                }
-            } else {
                 int index2 = matHashes[index].hash(key);
                 if ((Level2Hash[index].get(index2)).equals(key)) {
                     Level2Hash[index].set(index2, null);
-                    int size = (int) (Math.sqrt(Level2Hash[index].size()) - 1);
+                    int count=0;
+                    for(int i=0;i<Level2Hash[index].size();i++){
+                        if(Level2Hash[index].get(i)!=null)count++;
+                    }
+
+//                    int size = (int) (Math.sqrt(Level2Hash[index].size()) - 1);
+                    int size=(int)(Math.ceil(Math.sqrt(count)));
+                    size*=size;
                     //System.out.println("size2: "+ size);
-                    if(size >1) {
-                        ArrayList<String> ReHach = rehashing(size * size, index);
+                    if(size !=Level2Hash[index].size() && count!=0) {
+                        ArrayList<String> ReHach = rehashing(size, index);
                         Level2Hash[index]=ReHach;
-                    } else{
+                    }else if(count==0){
                     //    System.out.println("size ="+size);
                         Level2Hash[index].clear();
                         matHashes[index]=null;
@@ -171,7 +141,7 @@ public class N_linear implements PerfectHashing {
                     }
                 }
             }
-        }
+//        }
         printHash();
         return true;
     }
@@ -214,23 +184,23 @@ public class N_linear implements PerfectHashing {
         N_linear test = new N_linear(6);
         test.insert("nancy");
         System.out.println("hash--------------");
-        test.printHash();
+//        test.printHash();
         test.insert("sara");
         System.out.println("hash--------------");
-        test.printHash();
+//        test.printHash();
         test.insert("saraa");
         System.out.println("hash--------------");
-        test.printHash();
+//        test.printHash();
         test.insert("saraaa");
         System.out.println("hash--------------");
-        test.printHash();
+//        test.printHash();
         test.insert("saraaaaa");
         System.out.println("hash-----finalllll----");
-        test.printHash();
+//        test.printHash();
         System.out.println(test.search("saraa"));
-//        test.delete("sara");
-////        test.insert("saraaaaaaaaaaaa");
-//        System.out.println("hash-----delete----");
+        test.delete("sara");
+//        test.insert("saraaaaaaaaaaaa");
+        System.out.println("hash-----delete----");
 //        test.printHash();
     }
 }
