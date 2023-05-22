@@ -39,6 +39,4 @@ public class N_SquareTest {
         assertFalse( hash.search("Eman"));
     }
 
-
-
 }
