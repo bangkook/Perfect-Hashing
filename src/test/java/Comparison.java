@@ -31,7 +31,6 @@ public class Comparison {
             long[] totL = {0, 0, 0}, totQ = {0, 0, 0};
             for(int j = 0; j < avg; j++) {
                 N_linear linear = new N_linear(i);
-                N_Square quad = new N_Square(i);
 
                 ArrayList<String> words = generateRandomWords(i);
                 start = System.nanoTime();
@@ -43,6 +42,8 @@ public class Comparison {
                 totL[1] += (end - start) / avg;
                 totL[2] += linear.getCollisions();
 
+                N_Square quad = new N_Square(i);
+
                 start = System.nanoTime();
                 for(String word : words) {
                     quad.insert(word);
@@ -51,11 +52,12 @@ public class Comparison {
                 totQ[0] += quad.getSize();
                 totQ[1] += (end - start) / avg;
                 totQ[2] += quad.getCollisions();
+
             }
             System.out.println("At Size = " + i);
             System.out.println("Space: Linear = " + totL[0] / avg + ", Quad = " + totQ[0] / avg);
             System.out.println("Time: Linear = " + totL[1] + ", Quad = " + totQ[1]);
-            System.out.println("Collisions: Linear = " + totL[2] / avg + ", Quad = " + Math.ceil(1.0 * totQ[2] / avg));
+            System.out.println("Collisions: Linear = " + totL[2] / avg + ", Quad = " + Math.round(1.0 * totQ[2] / avg));
         }
     }
     public static void main(String[] args) {

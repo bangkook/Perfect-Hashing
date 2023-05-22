@@ -22,6 +22,7 @@ public class MatHash {
             hx |= x;
 //            System.out.println("hx= "+hx);
         }
+        if(hx < 0) System.out.println("Negative hash!!!!");
         return hx;
     }
 
@@ -38,8 +39,8 @@ public class MatHash {
         // 2^b = M --> b = log2(M) = log(M)/log(2)
         MatHash matHash = new MatHash((int) (Math.log(M) / Math.log(2)));
         System.out.println(matHash.hash("Hello"));
-        System.out.println(matHash.hash("Happy"));
-        System.out.println(matHash.hash("Dappy"));
-        System.out.println(matHash.hash("Samy"));
+        System.out.println(matHash.hash("Hello"));
+        System.out.println(matHash.hash("Hello"));
+        System.out.println(matHash.hash("Hello"));
     }
 }

@@ -8,88 +8,47 @@ public class N_Square implements PerfectHashing{
     int reh = 0;
 
     private static int nearestGreaterPowerOfTwo(int num) {
-        int power = 1;
-        while (power <= num) {
-            power *= 2;
-        }
-        return power;
+        return (int)Math.pow(2, Math.ceil(Math.log(num) / Math.log(2)));
     }
     public N_Square(int n) {
         this.N = n;
-         int N_sqBefore= N*N;
-         this.M = nearestGreaterPowerOfTwo(N_sqBefore);
-        System.out.println("Size of N^2 table = "+ M);
+        int N_sqBefore= N*N;
+        this.M = nearestGreaterPowerOfTwo(N_sqBefore);
         this.matHash = new MatHash((int)(Math.log(M)/Math.log(2)));
         this.hash = new String[M];
     }
 
     @Override
     public boolean insert(String key) {
-      //  System.out.println("In insert of N_Square: N  = "+ N);
-       // System.out.println("hash in main insert before= ");
-     //   printHash(hash);
         noOfInserted++;
-//        if(noOfInserted > N){
-//            return false;
-//        }
         return insert(key,hash);
     }
 
     boolean insert(String key, String[] hash2){
-
-
         int index = matHash.hash(key);
-        if(hash2[index] == null){ //empty, we can insert
-//            System.out.println("inserted = "+key);
+        if (hash2[index] == null) { //empty, we can insert
             hash2[index] = key;
-//            System.out.println("hash2 inserted= ");
-//            printHash(hash2);
-//            System.out.println("hash og = ");
-//            printHash(hash);
-        }else if(hash2[index].equals(key)){
-
-            // found same key
-           // System.out.println("found same key");
-            //printHash(hash2);
+        } else if (hash2[index].equals(key)) {
             return false; // already inserted
-        }else{
+        } else {
             collisions++;
-//            System.out.println("Collide = "+key);
             // collide
-//            System.out.println("going in rehash");
             String[] h = rehash(key, hash2);
-//            System.out.println("after rehash");
-//            System.out.println("h after rehash= ");
-            //printHash(h);
-//            hash2 = h;
-//            hash=h;
             System.arraycopy(h, 0, hash2, 0,M);
-//            System.out.println("hash2 after rehash = ");
-//            printHash(hash2);
-//            System.out.println("hash og = ");
-//            printHash(hash);
         }
-
         return true;
     }
 
     private String[] rehash(String key, String[] oldhash) {
         reh++;
-        //System.out.println("in rehash ="+reh);
-        //System.out.println("oldHash in begin of rehash= ");
-       // printHash(oldhash);
         String []newHash = new String[M];
         matHash = new MatHash((int)(Math.log(M)/Math.log(2)));
         for(String str : oldhash){
             if(str != null){
-                //System.out.println(" str ="+str);
                 insert(str,newHash);
             }
         }
-       // System.out.println("Inserting key in rehash");
         insert(key,newHash);
-        //System.out.println("newHash in end of rehash= ");
-       // printHash(newHash);
         reh--;
         return newHash;
     }
