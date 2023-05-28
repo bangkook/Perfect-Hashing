@@ -10,6 +10,7 @@ public class N_Square implements PerfectHashing{
     private static int nearestGreaterPowerOfTwo(int num) {
         return (int)Math.pow(2, Math.ceil(Math.log(num) / Math.log(2)));
     }
+
     public N_Square(int n) {
         this.N = n;
         int N_sqBefore= N*N;
@@ -55,13 +56,13 @@ public class N_Square implements PerfectHashing{
         return newHash;
     }
 
-    public void printHash(String[] h){
+    private void printHash(String[] h){
         for(String s : h){
             System.out.print(s +" , ");
         }
         System.out.println("\n------------------");
     }
-    public void printHashog(){
+    private void printHashog(){
         for(String s : hash){
             System.out.print(s +" , ");
         }

@@ -76,7 +76,7 @@ public class N_linear implements PerfectHashing {
         return true;
     }
 
-    public ArrayList<String> rehashing(int count, int index){
+    private ArrayList<String> rehashing(int count, int index){
         ArrayList<String> ReHach=new ArrayList<String>(count);
         boolean flag = true;
         while (flag) {
