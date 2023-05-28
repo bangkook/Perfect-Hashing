@@ -28,12 +28,12 @@ public class Dictionary implements IDictionary{
 //        if(noOfInserted > N){
 //            return false;
 //        }
-        if(perfectHash.getInserted() > N){
-            System.out.println("Hash table is complete! You can't insert.");
-            return false;
-        }
+//        if(perfectHash.getInserted() >= N){
+//            System.out.println("Hash table is complete! You can't insert.");
+//            return false;
+//        }
         if(!perfectHash.insert(key)){
-            System.out.println("Already exists");
+            System.out.println("Can't insert!");
             return false;
         }
         return true;

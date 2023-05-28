@@ -31,7 +31,6 @@ public class DictionaryTest {
         // test with N_Square
         Dictionary dict2 = new Dictionary(new N_Square(size),size);
         dict2.insert("Hello");
-        dict2.insert("CSED");
         assertTrue(dict2.delete("Hello"));
         assertFalse(dict2.delete("Hello"));
     }

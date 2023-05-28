@@ -8,7 +8,7 @@ public class N_linear implements PerfectHashing {
     private ArrayList<String>[] HashTable;
     private MatHash matHash;
     private MatHash[] matHashes;
-    private int FirstLevelCount = 0;
+//    private int FirstLevelCount = 0;
 
     private static int nearestGreaterPowerOfTwo(int num) {
         return (int)Math.pow(2, Math.ceil(Math.log(num) / Math.log(2)));
@@ -161,8 +161,8 @@ public class N_linear implements PerfectHashing {
         }
         System.out.println("----------------------------------------------------------");
     }
-    @Override
-    public int getInserted(){return FirstLevelCount;}
+//    @Override
+//    public int getInserted(){return FirstLevelCount;}
 
     public static void main(String[] args) {
         N_linear test = new N_linear(6);

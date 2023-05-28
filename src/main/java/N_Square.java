@@ -20,6 +20,8 @@ public class N_Square implements PerfectHashing{
 
     @Override
     public boolean insert(String key) {
+        if(noOfInserted >= N)
+            return false;
         noOfInserted++;
         return insert(key,hash);
     }
@@ -71,6 +73,7 @@ public class N_Square implements PerfectHashing{
         if(search(key)){
             int index = matHash.hash(key);
             hash[index]=null;
+            noOfInserted--;
             return true;
         }
         return false;
@@ -82,10 +85,6 @@ public class N_Square implements PerfectHashing{
         return hash[index] != null && hash[index].equals(key);
     }
 
-    @Override
-    public int getInserted() {
-        return noOfInserted;
-    }
 
     public int getCollisions() {
         return collisions;
