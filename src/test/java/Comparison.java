@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 public class Comparison {
     private ArrayList<String> generateRandomWords(int count) {
-        final String rootPath = "C:\\Users\\cyber\\Desktop\\Perfect-Hashing\\src\\test";
+        final String rootPath = "D:\\CSE25\\Second year\\Second term\\Data structure 2\\Projects\\Perfect-Hashing\\src\\test";
         Random rand = new Random();
 
         ArrayList<String> insertWords = new ArrayList<>();

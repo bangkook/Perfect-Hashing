@@ -80,11 +80,11 @@ public class DictionaryTest {
         int size = 1000;
         // test with N_Linear
         Dictionary dict1 = new Dictionary(new N_linear(size),size);
-        Point inserted1 = dict1.batchInsert("D:\\Second Year Computer\\Term 2\\Data Structures and Algorithms\\Labs\\Lab 3\\Perfect-Hashing\\src\\test\\random.txt");
+        Point inserted1 = dict1.batchInsert("D:\\CSE25\\Second year\\Second term\\Data structure 2\\Projects\\Perfect-Hashing\\src\\test\\random.txt");
         System.out.println("Inserted: " + inserted1.x + " , not inserted: "+inserted1.y);
         assertEquals(988,inserted1.x);
         assertEquals(12,inserted1.y);
-        Point deleted1 = dict1.batchDelete("D:\\Second Year Computer\\Term 2\\Data Structures and Algorithms\\Labs\\Lab 3\\Perfect-Hashing\\src\\test\\random_delete.txt");
+        Point deleted1 = dict1.batchDelete("D:\\CSE25\\Second year\\Second term\\Data structure 2\\Projects\\Perfect-Hashing\\src\\test\\random_delete.txt");
         System.out.println("Deleted: " + deleted1.x + " , not deleted: "+deleted1.y);
         assertEquals(32,deleted1.x);
         assertEquals(15,deleted1.y);
@@ -95,11 +95,11 @@ public class DictionaryTest {
         int size = 1000;
         // test with N_Square
         Dictionary dict2 = new Dictionary(new N_Square(size),size);
-        Point inserted1 = dict2.batchInsert("D:\\Second Year Computer\\Term 2\\Data Structures and Algorithms\\Labs\\Lab 3\\Perfect-Hashing\\src\\test\\random.txt");
+        Point inserted1 = dict2.batchInsert("D:\\CSE25\\Second year\\Second term\\Data structure 2\\Projects\\Perfect-Hashing\\src\\test\\random.txt");
         System.out.println("Inserted: " + inserted1.x + " , not inserted: "+inserted1.y);
         assertEquals(988,inserted1.x);
         assertEquals(12,inserted1.y);
-        Point deleted1 = dict2.batchDelete("D:\\Second Year Computer\\Term 2\\Data Structures and Algorithms\\Labs\\Lab 3\\Perfect-Hashing\\src\\test\\random_delete.txt");
+        Point deleted1 = dict2.batchDelete("D:\\CSE25\\Second year\\Second term\\Data structure 2\\Projects\\Perfect-Hashing\\src\\test\\random_delete.txt");
         System.out.println("Deleted: " + deleted1.x + " , not deleted: "+deleted1.y);
         assertEquals(32,deleted1.x);
         assertEquals(15,deleted1.y);

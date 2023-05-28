@@ -18,7 +18,7 @@ public class UniversalHashTest {
 
         // test for 300 words
         List<String> testWords = Collections.emptyList();
-        final String rootPath = "C:\\Users\\cyber\\Desktop\\Perfect-Hashing\\src\\test";
+        final String rootPath = "D:\\CSE25\\Second year\\Second term\\Data structure 2\\Projects\\Perfect-Hashing\\src\\test";
         try {
             testWords = Files.readAllLines(Paths.get(rootPath + "\\insert2"), StandardCharsets.UTF_8);
         } catch (IOException e) {
